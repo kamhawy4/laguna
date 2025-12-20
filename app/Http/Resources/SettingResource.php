@@ -14,13 +14,15 @@ class SettingResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $locale = app()->getLocale();
+
         return [
             'id' => $this->id,
             'phone_numbers' => $this->phone_numbers,
             'emails' => $this->emails,
-            'address' => $this->address,
-            'company_name' => $this->company_name,
-            'footer_text' => $this->footer_text,
+            'address' => $this->getTranslation('address', $locale),
+            'company_name' => $this->getTranslation('company_name', $locale),
+            'footer_text' => $this->getTranslation('footer_text', $locale),
             'map_embed_url' => $this->map_embed_url,
             'default_currency' => $this->default_currency,
             'default_language' => $this->default_language,

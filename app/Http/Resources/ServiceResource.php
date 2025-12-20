@@ -12,18 +12,21 @@ class ServiceResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $locale = app()->getLocale();
+
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'slug' => $this->slug,
-            'short_description' => $this->short_description,
-            'description' => $this->description,
+            'title' => $this->getTranslation('title', $locale),
+            'slug' => $this->getTranslation('slug', $locale),
+            'short_description' => $this->getTranslation('short_description', $locale),
+            'description' => $this->getTranslation('description', $locale),
             'icon' => $this->icon,
             'image' => $this->image,
             'is_featured' => (bool) $this->is_featured,
             'order' => $this->order,
             'status' => $this->status,
-            'seo_meta' => $this->seo_meta,
+            'meta_title' => $this->getTranslation('meta_title', $locale),
+            'meta_description' => $this->getTranslation('meta_description', $locale),
             'created_at' => $this->created_at?->toIso8601String(),
             'updated_at' => $this->updated_at?->toIso8601String(),
         ];

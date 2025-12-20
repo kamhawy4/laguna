@@ -12,11 +12,13 @@ class TestimonialResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $locale = app()->getLocale();
+
         return [
             'id' => $this->id,
-            'client_name' => $this->client_name,
-            'client_title' => $this->client_title,
-            'testimonial' => $this->testimonial,
+            'client_name' => $this->getTranslation('client_name', $locale),
+            'client_title' => $this->getTranslation('client_title', $locale),
+            'testimonial' => $this->getTranslation('testimonial', $locale),
             'rating' => $this->rating,
             'client_image' => $this->client_image,
             'video_url' => $this->video_url,

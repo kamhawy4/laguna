@@ -1,0 +1,1273 @@
+{
+  "info": {
+    "_postman_id": "laguna-api-collection",
+    "name": "Laguna API Collection",
+    "description": "Complete API collection for Laguna Real Estate Platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "List All Projects",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/projects",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "projects"
+              ]
+            },
+            "description": "Retrieve all projects with pagination and filtering"
+          }
+        },
+        {
+          "name": "Get Project by Slug",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/projects/slug/{{project_slug}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "slug",
+                "{{project_slug}}"
+              ]
+            },
+            "description": "Retrieve a specific project by its slug"
+          }
+        },
+        {
+          "name": "Get Project by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{project_id}}"
+              ]
+            },
+            "description": "Retrieve a specific project by its ID"
+          }
+        },
+        {
+          "name": "Create Project",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": {\n    \"en\": \"Luxury Downtown Development\",\n    \"ar\": \"تطوير فندقي فاخر\"\n  },\n  \"slug\": {\n    \"en\": \"luxury-downtown\",\n    \"ar\": \"تطوير-فندقي\"\n  },\n  \"short_description\": {\n    \"en\": \"Premium residential project\",\n    \"ar\": \"مشروع سكني فاخر\"\n  },\n  \"description\": {\n    \"en\": \"A stunning luxury residential development in the heart of downtown with modern amenities.\",\n    \"ar\": \"مشروع سكني فاخر مذهل في قلب المدينة مع وسائل الراحة الحديثة.\"\n  },\n  \"location\": \"Downtown Dubai\",\n  \"price_aed\": 2500000,\n  \"price_usd\": 681000,\n  \"price_eur\": 625000,\n  \"status\": \"published\",\n  \"is_featured\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "projects"
+              ]
+            },
+            "description": "Create a new project"
+          }
+        },
+        {
+          "name": "Update Project",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": {\n    \"en\": \"Updated Project Name\",\n    \"ar\": \"اسم المشروع المحدث\"\n  },\n  \"status\": \"published\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{project_id}}"
+              ]
+            },
+            "description": "Update an existing project"
+          }
+        },
+        {
+          "name": "Delete Project",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{project_id}}"
+              ]
+            },
+            "description": "Delete a project"
+          }
+        },
+        {
+          "name": "Publish Project",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/publish",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{project_id}}",
+                "publish"
+              ]
+            },
+            "description": "Publish a project"
+          }
+        },
+        {
+          "name": "Unpublish Project",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/unpublish",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{project_id}}",
+                "unpublish"
+              ]
+            },
+            "description": "Unpublish a project"
+          }
+        },
+        {
+          "name": "Toggle Featured Project",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/toggle-featured",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{project_id}}",
+                "toggle-featured"
+              ]
+            },
+            "description": "Toggle featured status of a project"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Blogs",
+      "item": [
+        {
+          "name": "List All Blogs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/blogs",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "blogs"
+              ]
+            },
+            "description": "Retrieve all blog posts with pagination"
+          }
+        },
+        {
+          "name": "Get Blog by Slug",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/blogs/slug/{{blog_slug}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "blogs",
+                "slug",
+                "{{blog_slug}}"
+              ]
+            },
+            "description": "Retrieve a specific blog by its slug"
+          }
+        },
+        {
+          "name": "Get Blog by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/blogs/{{blog_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "blogs",
+                "{{blog_id}}"
+              ]
+            },
+            "description": "Retrieve a specific blog by its ID"
+          }
+        },
+        {
+          "name": "Create Blog",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": {\n    \"en\": \"Real Estate Market Trends\",\n    \"ar\": \"اتجاهات سوق العقارات\"\n  },\n  \"slug\": {\n    \"en\": \"real-estate-trends\",\n    \"ar\": \"اتجاهات-العقارات\"\n  },\n  \"excerpt\": {\n    \"en\": \"Exploring the latest trends in real estate\",\n    \"ar\": \"استكشاف أحدث الاتجاهات في العقارات\"\n  },\n  \"content\": {\n    \"en\": \"Detailed blog content here...\",\n    \"ar\": \"محتوى المدونة المفصل هنا...\"\n  },\n  \"status\": \"published\",\n  \"is_featured\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/blogs",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "blogs"
+              ]
+            },
+            "description": "Create a new blog post"
+          }
+        },
+        {
+          "name": "Update Blog",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": {\n    \"en\": \"Updated Blog Title\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/blogs/{{blog_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "blogs",
+                "{{blog_id}}"
+              ]
+            },
+            "description": "Update an existing blog"
+          }
+        },
+        {
+          "name": "Delete Blog",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/blogs/{{blog_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "blogs",
+                "{{blog_id}}"
+              ]
+            },
+            "description": "Delete a blog post"
+          }
+        },
+        {
+          "name": "Publish Blog",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/blogs/{{blog_id}}/publish",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "blogs",
+                "{{blog_id}}",
+                "publish"
+              ]
+            },
+            "description": "Publish a blog post"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "item": [
+        {
+          "name": "List All Services",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/services",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "services"
+              ]
+            },
+            "description": "Retrieve all services"
+          }
+        },
+        {
+          "name": "Get Service by Slug",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/services/slug/{{service_slug}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "services",
+                "slug",
+                "{{service_slug}}"
+              ]
+            },
+            "description": "Retrieve a specific service by its slug"
+          }
+        },
+        {
+          "name": "Get Service by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/services/{{service_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "services",
+                "{{service_id}}"
+              ]
+            },
+            "description": "Retrieve a specific service by its ID"
+          }
+        },
+        {
+          "name": "Create Service",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": {\n    \"en\": \"Property Management\",\n    \"ar\": \"إدارة الممتلكات\"\n  },\n  \"slug\": {\n    \"en\": \"property-management\",\n    \"ar\": \"ادارة-الممتلكات\"\n  },\n  \"short_description\": {\n    \"en\": \"Professional property management services\",\n    \"ar\": \"خدمات إدارة الممتلكات الاحترافية\"\n  },\n  \"description\": {\n    \"en\": \"Complete property management solutions...\",\n    \"ar\": \"حلول إدارة الممتلكات الكاملة...\"\n  },\n  \"status\": \"published\",\n  \"is_featured\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/services",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "services"
+              ]
+            },
+            "description": "Create a new service"
+          }
+        },
+        {
+          "name": "Update Service",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": {\n    \"en\": \"Updated Service Name\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/services/{{service_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "services",
+                "{{service_id}}"
+              ]
+            },
+            "description": "Update an existing service"
+          }
+        },
+        {
+          "name": "Delete Service",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/services/{{service_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "services",
+                "{{service_id}}"
+              ]
+            },
+            "description": "Delete a service"
+          }
+        },
+        {
+          "name": "Toggle Featured Service",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/services/{{service_id}}/toggle-featured",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "services",
+                "{{service_id}}",
+                "toggle-featured"
+              ]
+            },
+            "description": "Toggle featured status of a service"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Testimonials",
+      "item": [
+        {
+          "name": "List All Testimonials",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/testimonials",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "testimonials"
+              ]
+            },
+            "description": "Retrieve all testimonials"
+          }
+        },
+        {
+          "name": "Get Testimonial by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/testimonials/{{testimonial_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "testimonials",
+                "{{testimonial_id}}"
+              ]
+            },
+            "description": "Retrieve a specific testimonial by its ID"
+          }
+        },
+        {
+          "name": "Create Testimonial",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_name\": {\n    \"en\": \"John Smith\",\n    \"ar\": \"جون سميث\"\n  },\n  \"client_title\": {\n    \"en\": \"Business Owner\",\n    \"ar\": \"صاحب عمل\"\n  },\n  \"testimonial\": {\n    \"en\": \"Excellent service and professional team!\",\n    \"ar\": \"خدمة ممتازة وفريق احترافي!\"\n  },\n  \"rating\": 5,\n  \"status\": \"published\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/testimonials",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "testimonials"
+              ]
+            },
+            "description": "Create a new testimonial"
+          }
+        },
+        {
+          "name": "Update Testimonial",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rating\": 5\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/testimonials/{{testimonial_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "testimonials",
+                "{{testimonial_id}}"
+              ]
+            },
+            "description": "Update an existing testimonial"
+          }
+        },
+        {
+          "name": "Delete Testimonial",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/testimonials/{{testimonial_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "testimonials",
+                "{{testimonial_id}}"
+              ]
+            },
+            "description": "Delete a testimonial"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Social Media Links",
+      "item": [
+        {
+          "name": "List All Social Media Links",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/social-media-links",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "social-media-links"
+              ]
+            },
+            "description": "Retrieve all social media links"
+          }
+        },
+        {
+          "name": "Get Social Media Link by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/social-media-links/{{social_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "social-media-links",
+                "{{social_id}}"
+              ]
+            },
+            "description": "Retrieve a specific social media link by its ID"
+          }
+        },
+        {
+          "name": "Create Social Media Link",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"platform\": \"facebook\",\n  \"url\": \"https://facebook.com/yourpage\",\n  \"icon\": \"fab fa-facebook\",\n  \"is_active\": true,\n  \"order\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/social-media-links",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "social-media-links"
+              ]
+            },
+            "description": "Create a new social media link"
+          }
+        },
+        {
+          "name": "Update Social Media Link",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://facebook.com/updated\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/social-media-links/{{social_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "social-media-links",
+                "{{social_id}}"
+              ]
+            },
+            "description": "Update an existing social media link"
+          }
+        },
+        {
+          "name": "Delete Social Media Link",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/social-media-links/{{social_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "social-media-links",
+                "{{social_id}}"
+              ]
+            },
+            "description": "Delete a social media link"
+          }
+        },
+        {
+          "name": "Toggle Active Status",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/social-media-links/{{social_id}}/toggle-active",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "social-media-links",
+                "{{social_id}}",
+                "toggle-active"
+              ]
+            },
+            "description": "Toggle active status of a social media link"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "item": [
+        {
+          "name": "Get All Settings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/settings",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "settings"
+              ]
+            },
+            "description": "Retrieve all site settings"
+          }
+        },
+        {
+          "name": "Get Setting by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/settings/{{setting_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "settings",
+                "{{setting_id}}"
+              ]
+            },
+            "description": "Retrieve a specific setting by its ID"
+          }
+        },
+        {
+          "name": "Create/Update Settings",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_name\": {\n    \"en\": \"Laguna Real Estate\",\n    \"ar\": \"لاجونا العقارات\"\n  },\n  \"address\": {\n    \"en\": \"Dubai, UAE\",\n    \"ar\": \"دبي، الإمارات\"\n  },\n  \"phone_numbers\": [\"+971-4-123-4567\", \"+971-50-123-4567\"],\n  \"emails\": [\"info@laguna.ae\", \"sales@laguna.ae\"],\n  \"footer_text\": {\n    \"en\": \"© 2024 Laguna Real Estate. All rights reserved.\",\n    \"ar\": \"© 2024 لاجونا العقارات. جميع الحقوق محفوظة.\"\n  },\n  \"map_url\": \"https://maps.google.com/...\",\n  \"default_currency\": \"AED\",\n  \"default_language\": \"en\",\n  \"status\": \"active\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/settings",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "settings"
+              ]
+            },
+            "description": "Create or update site settings"
+          }
+        },
+        {
+          "name": "Update Setting by ID",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_name\": {\n    \"en\": \"Updated Company Name\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/settings/{{setting_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "settings",
+                "{{setting_id}}"
+              ]
+            },
+            "description": "Update a specific setting"
+          }
+        },
+        {
+          "name": "Toggle Setting Status",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/settings/{{setting_id}}/toggle-status",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "settings",
+                "{{setting_id}}",
+                "toggle-status"
+              ]
+            },
+            "description": "Toggle status of a setting"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contacts",
+      "item": [
+        {
+          "name": "List All Contacts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/contacts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "contacts"
+              ]
+            },
+            "description": "Retrieve all contact submissions with pagination"
+          }
+        },
+        {
+          "name": "Get Contact by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/contacts/{{contact_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "contacts",
+                "{{contact_id}}"
+              ]
+            },
+            "description": "Retrieve a specific contact by its ID"
+          }
+        },
+        {
+          "name": "Submit Contact Form",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ahmed Mohammed\",\n  \"email\": \"ahmed@example.com\",\n  \"phone\": \"+971501234567\",\n  \"subject\": \"Inquiry about Property\",\n  \"message\": \"I am interested in learning more about your properties...\",\n  \"property_interest\": \"residential\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/contacts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "contacts"
+              ]
+            },
+            "description": "Submit a contact form from the frontend"
+          }
+        },
+        {
+          "name": "Update Contact",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"closed\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/contacts/{{contact_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "contacts",
+                "{{contact_id}}"
+              ]
+            },
+            "description": "Update a contact submission"
+          }
+        },
+        {
+          "name": "Delete Contact",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/contacts/{{contact_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "contacts",
+                "{{contact_id}}"
+              ]
+            },
+            "description": "Delete a contact submission"
+          }
+        },
+        {
+          "name": "Mark Contact as Read",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/contacts/{{contact_id}}/mark-as-read",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "contacts",
+                "{{contact_id}}",
+                "mark-as-read"
+              ]
+            },
+            "description": "Mark a contact submission as read"
+          }
+        },
+        {
+          "name": "Mark Contact as Closed",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/contacts/{{contact_id}}/mark-as-closed",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "contacts",
+                "{{contact_id}}",
+                "mark-as-closed"
+              ]
+            },
+            "description": "Mark a contact submission as closed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Area Guides",
+      "item": [
+        {
+          "name": "List All Area Guides",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/area-guides",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "area-guides"
+              ]
+            },
+            "description": "Retrieve all area guides"
+          }
+        },
+        {
+          "name": "Get Area Guide by Slug",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/area-guides/slug/{{guide_slug}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "area-guides",
+                "slug",
+                "{{guide_slug}}"
+              ]
+            },
+            "description": "Retrieve a specific area guide by its slug"
+          }
+        },
+        {
+          "name": "Get Area Guide by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/area-guides/{{guide_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "area-guides",
+                "{{guide_id}}"
+              ]
+            },
+            "description": "Retrieve a specific area guide by its ID"
+          }
+        },
+        {
+          "name": "Create Area Guide",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": {\n    \"en\": \"Downtown Dubai Guide\",\n    \"ar\": \"دليل وسط البلد\"\n  },\n  \"description\": {\n    \"en\": \"Complete guide to downtown area...\",\n    \"ar\": \"دليل شامل لمنطقة وسط البلد...\"\n  },\n  \"status\": \"published\",\n  \"is_popular\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/area-guides",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "area-guides"
+              ]
+            },
+            "description": "Create a new area guide"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Team Members",
+      "item": [
+        {
+          "name": "List All Team Members",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/team-members",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "team-members"
+              ]
+            },
+            "description": "Retrieve all team members"
+          }
+        },
+        {
+          "name": "Get Team Member by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/team-members/{{member_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "team-members",
+                "{{member_id}}"
+              ]
+            },
+            "description": "Retrieve a specific team member by its ID"
+          }
+        },
+        {
+          "name": "Create Team Member",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sarah Johnson\",\n  \"position\": {\n    \"en\": \"Sales Manager\",\n    \"ar\": \"مدير المبيعات\"\n  },\n  \"email\": \"sarah@laguna.ae\",\n  \"phone\": \"+971501234567\",\n  \"bio\": {\n    \"en\": \"Experienced real estate professional...\",\n    \"ar\": \"متخصصة متمرسة في العقارات...\"\n  },\n  \"status\": \"published\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/team-members",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "team-members"
+              ]
+            },
+            "description": "Create a new team member"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "project_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "project_slug",
+      "value": "luxury-downtown",
+      "type": "string"
+    },
+    {
+      "key": "blog_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "blog_slug",
+      "value": "real-estate-trends",
+      "type": "string"
+    },
+    {
+      "key": "service_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "service_slug",
+      "value": "property-management",
+      "type": "string"
+    },
+    {
+      "key": "testimonial_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "social_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "setting_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "contact_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "guide_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "guide_slug",
+      "value": "downtown-dubai",
+      "type": "string"
+    },
+    {
+      "key": "member_id",
+      "value": "1",
+      "type": "string"
+    }
+  ]
+}
