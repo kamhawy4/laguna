@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Services\AreaUnitConversionService;
+use App\Services\CurrencyConversionService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -15,6 +17,18 @@ class ProjectResource extends JsonResource
     public function toArray(Request $request): array
     {
         $locale = app()->getLocale();
+        $currency = $request->currency ?? 'AED';
+        $areaUnit = $request->areaUnit ?? 'sqm';
+
+        // Initialize conversion services
+        $currencyService = new CurrencyConversionService();
+        $areaService = new AreaUnitConversionService();
+
+        // Convert base currency (AED) to requested currency
+        $convertedPrice = $currencyService->convertFromBase((float) $this->price_aed, $currency);
+
+        // Convert base area (sqm) to requested unit
+        $convertedArea = $areaService->convertFromBase((float) $this->area, $areaUnit);
 
         return [
             'id' => $this->id,
@@ -34,15 +48,19 @@ class ProjectResource extends JsonResource
             'gallery' => $this->gallery ?? [],
             'floor_plans' => $this->floor_plans ?? [],
             'pricing' => [
-                'aed' => $this->price_aed,
-                'usd' => $this->price_usd,
-                'eur' => $this->price_eur,
+                'currency' => $currency,
+                'price' => $convertedPrice,
+                'base_price_aed' => (float) $this->price_aed, // For reference
+            ],
+            'area' => [
+                'value' => $convertedArea,
+                'unit' => $areaUnit,
+                'base_value_sqm' => (float) $this->area, // For reference
             ],
             'coordinates' => [
                 'latitude' => $this->latitude,
                 'longitude' => $this->longitude,
             ],
-            'area' => $this->area,
             'property_type' => $this->property_type,
             'delivery_date' => $this->delivery_date?->format('Y-m-d'),
             'is_featured' => $this->is_featured ?? false,
@@ -53,3 +71,4 @@ class ProjectResource extends JsonResource
         ];
     }
 }
+
