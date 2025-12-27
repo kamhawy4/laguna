@@ -94,28 +94,27 @@ class ProjectResource extends Resource
                     ])
                     ->columns(2),
 
-                Forms\Components\Section::make('Pricing (Multi-Currency)')
+                Forms\Components\Section::make('Pricing & Area (Base Currency: AED)')
                     ->schema([
                         Forms\Components\TextInput::make('price_aed')
                             ->label('Price (AED)')
                             ->numeric()
                             ->prefix('AED')
-                            ->minValue(0),
+                            ->minValue(0)
+                            ->step(0.01)
+                            ->placeholder('0.00')
+                            ->helperText('Enter the project price in AED (base currency). All other currency conversions are calculated automatically based on exchange rates managed in Currency Rates settings.'),
 
-                        Forms\Components\TextInput::make('price_usd')
-                            ->label('Price (USD)')
+                        Forms\Components\TextInput::make('area')
+                            ->label('Area (sqm)')
                             ->numeric()
-                            ->prefix('USD')
-                            ->minValue(0),
-
-                        Forms\Components\TextInput::make('price_eur')
-                            ->label('Price (EUR)')
-                            ->numeric()
-                            ->prefix('EUR')
-                            ->minValue(0),
+                            ->suffix('sqm')
+                            ->minValue(0)
+                            ->step(0.01)
+                            ->placeholder('0.00')
+                            ->helperText('Enter the project area in square meters (sqm). Area conversions to sqft happen automatically in the API.'),
                     ])
-                    ->columns(3)
-                    ->description('Enter price in one currency and others will be auto-calculated'),
+                    ->columns(2),
 
                 Forms\Components\Section::make('Project Details')
                     ->schema([

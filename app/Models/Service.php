@@ -18,6 +18,7 @@ class Service extends Model
         'description',
         'icon',
         'image',
+        'price_aed',
         'meta_title',
         'meta_description',
         'is_featured',
@@ -38,6 +39,7 @@ class Service extends Model
     protected $casts = [
         'is_featured' => 'boolean',
         'order' => 'integer',
+        'price_aed' => 'decimal:2',
         'seo_meta' => 'json',
     ];
 

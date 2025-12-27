@@ -28,8 +28,11 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('Laguna Life')
+            ->brandLogoHeight('120px')
+            ->favicon(asset('images/logo/laguna-logo.jpg'))
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Blue,
             ])
             ->plugin(
                 SpatieLaravelTranslatablePlugin::make()

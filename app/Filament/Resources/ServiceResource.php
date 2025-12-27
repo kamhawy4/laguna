@@ -68,6 +68,18 @@ class ServiceResource extends Resource
                     ])
                     ->columns(2),
 
+                Forms\Components\Section::make('Pricing (Base Currency: AED)')
+                    ->schema([
+                        Forms\Components\TextInput::make('price_aed')
+                            ->label('Price (AED)')
+                            ->numeric()
+                            ->minValue(0)
+                            ->step(0.01)
+                            ->placeholder('0.00')
+                            ->helperText('Enter the service price in AED. This is the base currency. All other currency conversions are calculated automatically based on exchange rates.'),
+                    ])
+                    ->columns(1),
+
                 Forms\Components\Section::make('SEO Metadata')
                     ->schema([
                         Forms\Components\TextInput::make('seo_meta.meta_title')
