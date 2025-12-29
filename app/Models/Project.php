@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Translatable\HasTranslations;
 
@@ -81,4 +82,16 @@ class Project extends Model
         'delivery_date' => 'date',
         'sort_order' => 'integer',
     ];
+
+    public function area(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            AreaGuide::class,
+            'area_guide_project',
+            'project_id',
+            'area_guide_id'
+        )->wherePivot('deleted_at', null)
+            ->orderByPivot('sort_order');
+    }
+
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
+use App\Models\AreaGuide;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -119,6 +120,75 @@ class ProjectController extends Controller
         } catch (\Exception $e) {
             return $this->errorResponse(
                 'Failed to retrieve project: ' . $e->getMessage(),
+                500
+            );
+        }
+    }
+
+    /**
+     * Get projects by area guide.
+     */
+    public function byAreaGuide(string $areaGuideSlug, Request $request): JsonResponse
+    {
+        try {
+            $perPage = $request->integer('per_page', 15);
+            $locale = $request->get('locale', app()->getLocale());
+
+            $areaGuide = AreaGuide::where(
+                "slug->{$locale}",
+                $areaGuideSlug
+            )->first();
+
+            if (!$areaGuide) {
+                return $this->notFoundResponse('Area guide not found');
+            }
+
+            $projects = $areaGuide->projects()
+                ->where('status', 'published')
+                ->paginate($perPage);
+
+            if ($projects->isEmpty()) {
+                return $this->notFoundResponse('No projects found for this area guide');
+            }
+
+            return $this->successResponse(
+                ProjectResource::collection($projects)->response()->getData(true),
+                'Projects retrieved successfully'
+            );
+        } catch (\Exception $e) {
+            return $this->errorResponse(
+                'Failed to retrieve projects: ' . $e->getMessage(),
+                500
+            );
+        }
+    }
+
+    /**
+     * Get featured projects.
+     */
+    public function getFeatured(Request $request): JsonResponse
+    {
+        try {
+            $perPage = $request->integer('per_page', 6);
+            $limit = $request->integer('limit', null);
+
+            $query = \App\Models\Project::where('is_featured', true)
+                ->where('status', 'published')
+                ->orderBy('sort_order', 'asc');
+
+            if ($limit) {
+                $projects = $query->limit($limit)->get();
+            } else {
+                $projects = $query->paginate($perPage);
+            }
+
+            return $this->successResponse(
+                ProjectResource::collection($projects)->response()->getData(true),
+                'Featured projects retrieved successfully'
+            );
+        } catch (\Exception $e) {
+            return $this->errorResponse(
+                'Failed to retrieve featured projects: ' . $e->getMessage(),
                 500
             );
         }

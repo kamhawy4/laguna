@@ -31,7 +31,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('projects')->name('projects.')->group(function () {
     // Public routes
     Route::get('/', [ProjectController::class, 'index'])->name('index');
+    Route::get('/featured', [ProjectController::class, 'getFeatured'])->name('featured');
     Route::get('/slug/{slug}', [ProjectController::class, 'showBySlug'])->name('show-by-slug');
+    Route::get('/area-guide/{areaGuideSlug}', [ProjectController::class, 'byAreaGuide'])->name('by-area-guide');
     Route::get('/{id}', [ProjectController::class, 'show'])->name('show');
     
     // Protected routes (add auth middleware as needed)

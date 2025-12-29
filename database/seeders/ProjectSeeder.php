@@ -3,192 +3,121 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
-use App\Models\AreaGuide;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class ProjectSeeder extends Seeder
 {
     public function run(): void
     {
-        $areaGuides = AreaGuide::all();
-
-        if ($areaGuides->isEmpty()) {
-            $this->command->warn('No AreaGuides found. Please seed AreaGuides first.');
-            return;
-        }
-
         $projects = [
             [
-                'title' => [
+                'name' => [
                     'en' => 'Luxury Waterfront Villa',
-                    'ar' => 'فيلا فاخرة على الواجهة المائية'
+                    'ar' => 'فيلا فاخرة على الواجهة المائية',
                 ],
                 'slug' => [
                     'en' => 'luxury-waterfront-villa',
-                    'ar' => 'فيلا-فاخرة-واجهة-مائية'
-                ],
-                'description' => [
-                    'en' => 'Stunning 5-bedroom villa with private beach access, infinity pool, and panoramic sea views.',
-                    'ar' => 'فيلا رائعة بـ 5 غرف نوم مع إمكانية الوصول الخاص للشاطئ وحمام سباحة لامحدود ومناظر بحرية بانورامية.'
+                    'ar' => 'فيلا-فاخرة-على-الواجهة-المائية',
                 ],
                 'short_description' => [
-                    'en' => 'Premium waterfront property with exclusive beach access',
-                    'ar' => 'عقار فاخر على الواجهة المائية مع إمكانية وصول حصري للشاطئ'
+                    'en' => 'Premium waterfront villa with private beach access.',
+                    'ar' => 'فيلا فاخرة على الواجهة المائية مع شاطئ خاص.',
+                ],
+                'description' => [
+                    'en' => 'A stunning luxury villa featuring private beach access, infinity pool, and panoramic sea views.',
+                    'ar' => 'فيلا فاخرة تتميز بشاطئ خاص وحمام سباحة لا متناهي وإطلالة بحرية بانورامية.',
+                ],
+                'overview' => [
+                    'en' => 'High-end residential project for luxury living.',
+                    'ar' => 'مشروع سكني فاخر لحياة راقية.',
+                ],
+                'location' => [
+                    'en' => 'Palm Jumeirah, Dubai',
+                    'ar' => 'نخلة جميرا، دبي',
+                ],
+                'developer_name' => [
+                    'en' => 'Laguna Developments',
+                    'ar' => 'لاجونا للتطوير العقاري',
+                ],
+                'developer_info' => [
+                    'en' => 'A leading real estate developer specializing in luxury projects.',
+                    'ar' => 'شركة رائدة في تطوير المشاريع العقارية الفاخرة.',
+                ],
+                'amenities' => [
+                    'en' => [
+                        'Private Beach' => 'Exclusive beach access',
+                        'Infinity Pool' => 'Sea-view pool',
+                    ],
+                    'ar' => [
+                        'شاطئ خاص' => 'وصول حصري للشاطئ',
+                        'حمام سباحة لا متناهي' => 'إطلالة بحرية',
+                    ],
+                ],
+                'payment_plan' => [
+                    'en' => [
+                        'Down Payment' => '20%',
+                        'On Handover' => '80%',
+                    ],
+                    'ar' => [
+                        'الدفعة المقدمة' => '20%',
+                        'عند الاستلام' => '80%',
+                    ],
+                ],
+                'featured_image' => 'projects/featured/sample.jpg',
+                'gallery' => [
+                    ['image' => 'projects/gallery/sample1.jpg'],
+                    ['image' => 'projects/gallery/sample2.jpg'],
+                ],
+                'floor_plans' => [
+                    ['file' => 'projects/floor-plans/plan1.pdf'],
                 ],
                 'price_aed' => 7500000,
+                'latitude' => 25.11234567,
+                'longitude' => 55.13876543,
                 'area' => 850,
-                'bedrooms' => 5,
-                'bathrooms' => 5,
-                'parking_spaces' => 4,
-                'image' => 'https://via.placeholder.com/800x600?text=Luxury+Villa',
-                'status' => 'published',
-                'is_featured' => true,
+                'property_type' => 'villa',
                 'delivery_date' => now()->addMonths(6),
-                'seo_meta' => [
-                    'meta_title' => 'Luxury Waterfront Villa - Laguna Life Real Estate',
-                    'meta_description' => 'Discover stunning waterfront villas with private beach access and premium amenities.',
-                    'meta_keywords' => 'luxury villa, waterfront property, beach house'
-                ]
+                'is_featured' => true,
+                'status' => 'published',
+                'sort_order' => 1,
             ],
+
             [
-                'title' => [
+                'name' => [
                     'en' => 'Modern Downtown Apartment',
-                    'ar' => 'شقة حديثة وسط البلد'
+                    'ar' => 'شقة حديثة وسط المدينة',
                 ],
                 'slug' => [
                     'en' => 'modern-downtown-apartment',
-                    'ar' => 'شقة-حديثة-وسط-البلد'
-                ],
-                'description' => [
-                    'en' => 'Sleek 3-bedroom apartment in the heart of the city with smart home features and stunning skyline views.',
-                    'ar' => 'شقة أنيقة بـ 3 غرف نوم في قلب المدينة مع ميزات منزل ذكي ومناظر خط السماء مذهلة.'
+                    'ar' => 'شقة-حديثة-وسط-المدينة',
                 ],
                 'short_description' => [
-                    'en' => 'Contemporary city apartment with smart home technology',
-                    'ar' => 'شقة حديثة بتقنيات المنزل الذكي'
+                    'en' => 'Contemporary apartment in the heart of the city.',
+                    'ar' => 'شقة عصرية في قلب المدينة.',
+                ],
+                'description' => [
+                    'en' => 'Modern apartment with skyline views and smart home features.',
+                    'ar' => 'شقة حديثة بإطلالات رائعة وتقنيات منزل ذكي.',
+                ],
+                'location' => [
+                    'en' => 'Downtown Dubai',
+                    'ar' => 'وسط مدينة دبي',
                 ],
                 'price_aed' => 2800000,
                 'area' => 320,
-                'bedrooms' => 3,
-                'bathrooms' => 2,
-                'parking_spaces' => 2,
-                'image' => 'https://via.placeholder.com/800x600?text=Modern+Apartment',
-                'status' => 'published',
-                'is_featured' => true,
+                'property_type' => 'apartment',
                 'delivery_date' => now()->addMonths(3),
-                'seo_meta' => [
-                    'meta_title' => 'Modern Downtown Apartment - Laguna Life',
-                    'meta_description' => 'Premium apartments with smart home features in the downtown area.',
-                    'meta_keywords' => 'apartment, downtown, smart home'
-                ]
-            ],
-            [
-                'title' => [
-                    'en' => 'Spacious Family Villa',
-                    'ar' => 'فيلا واسعة للعائلة'
-                ],
-                'slug' => [
-                    'en' => 'spacious-family-villa',
-                    'ar' => 'فيلا-واسعة-للعائلة'
-                ],
-                'description' => [
-                    'en' => 'Spacious 6-bedroom villa with garden, swimming pool, and close to schools and shopping centers.',
-                    'ar' => 'فيلا واسعة بـ 6 غرف نوم مع حديقة وحمام سباحة وقريبة من المدارس ومراكز التسوق.'
-                ],
-                'short_description' => [
-                    'en' => 'Family-friendly villa near schools and amenities',
-                    'ar' => 'فيلا عائلية قريبة من المدارس والمرافق'
-                ],
-                'price_aed' => 5200000,
-                'area' => 1200,
-                'bedrooms' => 6,
-                'bathrooms' => 4,
-                'parking_spaces' => 3,
-                'image' => 'https://via.placeholder.com/800x600?text=Family+Villa',
-                'status' => 'published',
                 'is_featured' => false,
-                'delivery_date' => now()->addMonths(8),
-                'seo_meta' => [
-                    'meta_title' => 'Spacious Family Villa - Laguna Life Real Estate',
-                    'meta_description' => 'Large family villas with modern amenities near schools and shopping.',
-                    'meta_keywords' => 'family villa, spacious home, schools nearby'
-                ]
-            ],
-            [
-                'title' => [
-                    'en' => 'Penthouse with Terrace',
-                    'ar' => 'بنتهاوس مع شرفة'
-                ],
-                'slug' => [
-                    'en' => 'penthouse-with-terrace',
-                    'ar' => 'بنتهاوس-مع-شرفة'
-                ],
-                'description' => [
-                    'en' => 'Exclusive penthouse on the top floor with private terrace, jacuzzi, and 360-degree city views.',
-                    'ar' => 'بنتهاوس حصري في الطابق العلوي مع شرفة خاصة وجاكوزي ومناظر المدينة 360 درجة.'
-                ],
-                'short_description' => [
-                    'en' => 'Exclusive penthouse with panoramic views',
-                    'ar' => 'بنتهاوس حصري مع مناظر بانورامية'
-                ],
-                'price_aed' => 4500000,
-                'area' => 480,
-                'bedrooms' => 4,
-                'bathrooms' => 3,
-                'parking_spaces' => 2,
-                'image' => 'https://via.placeholder.com/800x600?text=Penthouse',
                 'status' => 'published',
-                'is_featured' => true,
-                'delivery_date' => now()->addMonths(4),
-                'seo_meta' => [
-                    'meta_title' => 'Exclusive Penthouse - Laguna Life',
-                    'meta_description' => 'Luxury penthouse with private terrace and panoramic city views.',
-                    'meta_keywords' => 'penthouse, luxury, city views'
-                ]
-            ],
-            [
-                'title' => [
-                    'en' => 'Studio Investment Unit',
-                    'ar' => 'وحدة استثمارية استوديو'
-                ],
-                'slug' => [
-                    'en' => 'studio-investment-unit',
-                    'ar' => 'وحدة-استثمارية-استوديو'
-                ],
-                'description' => [
-                    'en' => 'Compact studio apartment perfect for investors, fully furnished and ready for rental.',
-                    'ar' => 'شقة استوديو صغيرة مثالية للمستثمرين، مفروشة بالكامل وجاهزة للإيجار.'
-                ],
-                'short_description' => [
-                    'en' => 'Investment-ready furnished studio',
-                    'ar' => 'استوديو مفروش وجاهز للاستثمار'
-                ],
-                'price_aed' => 950000,
-                'area' => 65,
-                'bedrooms' => 0,
-                'bathrooms' => 1,
-                'parking_spaces' => 1,
-                'image' => 'https://via.placeholder.com/800x600?text=Studio',
-                'status' => 'draft',
-                'is_featured' => false,
-                'delivery_date' => now()->addMonths(2),
-                'seo_meta' => [
-                    'meta_title' => 'Studio Investment Unit - Laguna Life',
-                    'meta_description' => 'Affordable furnished studio perfect for investors and renters.',
-                    'meta_keywords' => 'studio, investment, furnished'
-                ]
+                'sort_order' => 2,
             ],
         ];
 
         foreach ($projects as $project) {
-            $areaGuide = $areaGuides->random();
-
-            Project::create([
-                ...$project,
-                'area_guide_id' => $areaGuide->id,
-            ]);
+            Project::create($project);
         }
 
-        $this->command->info('ProjectSeeder completed successfully. ' . count($projects) . ' projects created.');
+        $this->command->info('Projects seeded successfully.');
     }
 }
