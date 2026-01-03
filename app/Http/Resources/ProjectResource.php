@@ -57,10 +57,8 @@ class ProjectResource extends JsonResource
                 'unit' => $areaUnit,
                 'base_value_sqm' => (float) $this->area, // For reference
             ],
-            'coordinates' => [
-                'latitude' => $this->latitude,
-                'longitude' => $this->longitude,
-            ],
+            'map_embed' => $this->map_embed,
+            'roi' => (float) ($this->roi ?? 0),
             'property_type' => $this->property_type,
             'delivery_date' => $this->delivery_date?->format('Y-m-d'),
             'is_featured' => $this->is_featured ?? false,

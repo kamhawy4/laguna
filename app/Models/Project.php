@@ -34,9 +34,9 @@ class Project extends Model
         'gallery',
         'floor_plans',
         'price_aed',
-        'latitude',
-        'longitude',
         'area',
+        'map_embed',
+        'roi',
         'property_type',
         'delivery_date',
         'is_featured',
@@ -75,9 +75,8 @@ class Project extends Model
         'gallery' => 'array',
         'floor_plans' => 'array',
         'price_aed' => 'decimal:2',
-        'latitude' => 'decimal:8',
-        'longitude' => 'decimal:8',
         'area' => 'decimal:2',
+        'roi' => 'decimal:2',
         'is_featured' => 'boolean',
         'delivery_date' => 'date',
         'sort_order' => 'integer',
@@ -93,5 +92,11 @@ class Project extends Model
         )->wherePivot('deleted_at', null)
             ->orderByPivot('sort_order');
     }
+
+    public function getNameForLocaleAttribute(): string
+    {
+        return $this->getTranslation('name', app()->getLocale());
+    }
+
 
 }

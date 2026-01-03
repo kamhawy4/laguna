@@ -1,9 +1,5 @@
 # Product Requirements Document (PRD)
 
-use laravel 10 
-
-use filamentphp 3
-
 
 ## 1. Overview
 
@@ -54,7 +50,7 @@ Design and develop a fully dynamic real estate website powered by a custom or he
 * Team
 * Testimonials
 * Contact / Help People Find Projects
-
+* 
 ---
 
 ## 6. Global Components
@@ -262,25 +258,7 @@ Design and develop a fully dynamic real estate website powered by a custom or he
 * Role-based access (Admin, Editor)
 * Draft / publish workflow
 
-### 8.3 SEO & Analytics Management
-
-* SEO-friendly URLs and slugs (per language)
-* Meta title, meta description, Open Graph data managed via CMS
-* Sitemap.xml generation (EN & AR)
-* Robots.txt configuration
-* Google Search Console setup and verification
-* Google Analytics (GA4) setup
-* Google Tag Manager (GTM) setup and integration
-* Event tracking (form submissions, CTA clicks, project views)
-* Conversion tracking for lead forms
-
 ### 8.4 Accounts & Access Management
-
-* Setup and manage Google Analytics account
-
-* Setup and manage Google Tag Manager account
-
-* Setup and manage Google Search Console property
 
 * Proper user access and permissions for LAGUNA LIFE team
 

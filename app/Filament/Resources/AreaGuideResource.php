@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Validation\Rule;
 
 class AreaGuideResource extends Resource
 {
@@ -20,6 +21,8 @@ class AreaGuideResource extends Resource
     protected static ?string $model = AreaGuide::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-map-pin';
+
+    protected static ?string $navigationGroup = 'Projects';
 
     protected static ?string $navigationLabel = 'Area Guides';
 
@@ -41,8 +44,20 @@ class AreaGuideResource extends Resource
                         Forms\Components\TextInput::make('slug')
                             ->label('Slug')
                             ->maxLength(255)
-                            ->unique(ignoreRecord: true)
-                            ->helperText('Auto-generated from name if left empty'),
+                            ->disabled()
+                            ->rules([
+                                function ($record) {
+                                    $locale = app()->getLocale();
+
+                                    return Rule::unique('area_guides', "slug->{$locale}")
+                                        ->ignore($record?->id);
+                                },
+                            ])
+                            ->helperText('Auto-generated from name. Use hyphens (-) for spaces.')
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn(string $operation, $state, Forms\Set $set, Forms\Get $get) =>
+                            $operation === 'create' && $state === '' ? $set('slug', \Illuminate\Support\Str::slug($get('name'))) : null
+                            ),
 
                         Forms\Components\RichEditor::make('description')
                             ->label('Description')

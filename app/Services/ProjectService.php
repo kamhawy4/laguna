@@ -103,60 +103,6 @@ class ProjectService implements ProjectServiceInterface
         return $this->repository->findBySlug($slug, $locale, $relations);
     }
 
-    /**
-     * Create a new project.
-     *
-     * @param array $data
-     * @return Project
-     */
-    public function create(array $data): Project
-    {
-        // Generate slugs if name is provided
-        if (isset($data['name'])) {
-            $data['slug'] = $this->generateSlug($data['name']);
-        }
-
-        // Format price data
-        $data = $this->formatPriceData($data);
-
-        // Set default status if not provided
-        if (!isset($data['status'])) {
-            $data['status'] = 'draft';
-        }
-
-        return $this->repository->create($data);
-    }
-
-    /**
-     * Update a project.
-     *
-     * @param int|string $id
-     * @param array $data
-     * @return Project
-     */
-    public function update($id, array $data): Project
-    {
-        // Generate slugs if name is being updated
-        if (isset($data['name'])) {
-            $data['slug'] = $this->generateSlug($data['name'], $id);
-        }
-
-        // Format price data
-        $data = $this->formatPriceData($data);
-
-        return $this->repository->update($id, $data);
-    }
-
-    /**
-     * Delete a project.
-     *
-     * @param int|string $id
-     * @return bool
-     */
-    public function delete($id): bool
-    {
-        return $this->repository->delete($id);
-    }
 
     /**
      * Filter projects by criteria.
@@ -189,7 +135,7 @@ class ProjectService implements ProjectServiceInterface
 
         foreach ($locales as $locale) {
             $nameValue = $name[$locale] ?? $name['en'] ?? '';
-            
+
             if (empty($nameValue)) {
                 continue;
             }
@@ -387,8 +333,8 @@ class ProjectService implements ProjectServiceInterface
         // Ensure price values are properly formatted
         foreach (['price_aed', 'price_usd', 'price_eur'] as $priceField) {
             if (isset($data[$priceField])) {
-                $data[$priceField] = is_numeric($data[$priceField]) 
-                    ? round((float) $data[$priceField], 2) 
+                $data[$priceField] = is_numeric($data[$priceField])
+                    ? round((float) $data[$priceField], 2)
                     : null;
             }
         }

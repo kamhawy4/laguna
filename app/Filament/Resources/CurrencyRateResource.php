@@ -19,8 +19,7 @@ class CurrencyRateResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 
-    protected static ?string $navigationGroup = 'Settings';
-
+    protected static ?string $navigationGroup = 'Projects';
     protected static ?int $navigationSort = 100;
 
     protected static ?string $recordTitleAttribute = 'currency_code';

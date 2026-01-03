@@ -1,0 +1,845 @@
+{
+  "info": {
+    "_postman_id": "laguna-life-api-collection",
+    "name": "Laguna Life API Collection",
+    "description": "Complete API collection for Laguna Life Real Estate Platform - Multi-currency, Multi-language, Multi-area support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Currency Rates",
+      "item": [
+        {
+          "name": "Get All Currency Rates",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/currency-rates",
+              "host": ["{{base_url}}"],
+              "path": ["api", "currency-rates"]
+            },
+            "description": "Retrieve all active currency rates"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Currency by Code",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/currency-rates/USD",
+              "host": ["{{base_url}}"],
+              "path": ["api", "currency-rates", "USD"]
+            },
+            "description": "Get specific currency by code (USD, EUR, AED, GBP, SAR)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Base Currency",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/currency-rates/base",
+              "host": ["{{base_url}}"],
+              "path": ["api", "currency-rates", "base"]
+            },
+            "description": "Get the base currency (AED with exchange_rate = 1.0)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Currencies",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/currency-rates/active",
+              "host": ["{{base_url}}"],
+              "path": ["api", "currency-rates", "active"]
+            },
+            "description": "Get only active currencies"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "Get All Projects",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "X-Currency",
+                "value": "AED",
+                "type": "text"
+              },
+              {
+                "key": "X-Area-Unit",
+                "value": "sqm",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects?per_page=15",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects"],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "15"
+                },
+                {
+                  "key": "status",
+                  "value": "published",
+                  "disabled": true
+                },
+                {
+                  "key": "is_featured",
+                  "value": "true",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Get all projects with pagination support. Use headers for language, currency, and area unit conversion."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Featured Projects",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "X-Currency",
+                "value": "AED",
+                "type": "text"
+              },
+              {
+                "key": "X-Area-Unit",
+                "value": "sqm",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/featured?per_page=6",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "featured"],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "6"
+                },
+                {
+                  "key": "limit",
+                  "value": "6",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Get featured projects only. Supports per_page parameter for pagination or limit for exact count."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Projects by Area Guide",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "X-Currency",
+                "value": "AED",
+                "type": "text"
+              },
+              {
+                "key": "X-Area-Unit",
+                "value": "sqm",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/area-guide/downtown-dubai",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "area-guide", "downtown-dubai"]
+            },
+            "description": "Get projects filtered by area guide slug"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Project by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "X-Currency",
+                "value": "AED",
+                "type": "text"
+              },
+              {
+                "key": "X-Area-Unit",
+                "value": "sqm",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "1"]
+            },
+            "description": "Get specific project by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Project by Slug",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "X-Currency",
+                "value": "AED",
+                "type": "text"
+              },
+              {
+                "key": "X-Area-Unit",
+                "value": "sqm",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/slug/luxury-villa-project",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "slug", "luxury-villa-project"]
+            },
+            "description": "Get project by URL slug"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Blogs",
+      "item": [
+        {
+          "name": "Get All Blogs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/blogs?per_page=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "blogs"],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get all blog posts with pagination"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Blog by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/blogs/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "blogs", "1"]
+            },
+            "description": "Get specific blog post by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Blog by Slug",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/blogs/slug/real-estate-investment-guide",
+              "host": ["{{base_url}}"],
+              "path": ["api", "blogs", "slug", "real-estate-investment-guide"]
+            },
+            "description": "Get blog post by URL slug"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Area Guides",
+      "item": [
+        {
+          "name": "Get All Area Guides",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/area-guides?per_page=20",
+              "host": ["{{base_url}}"],
+              "path": ["api", "area-guides"],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Get all area guides"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Area Guide by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/area-guides/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "area-guides", "1"]
+            },
+            "description": "Get specific area guide by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Area Guide by Slug",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/area-guides/slug/marina",
+              "host": ["{{base_url}}"],
+              "path": ["api", "area-guides", "slug", "marina"]
+            },
+            "description": "Get area guide by URL slug"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "item": [
+        {
+          "name": "Get All Services",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "X-Currency",
+                "value": "AED",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/services",
+              "host": ["{{base_url}}"],
+              "path": ["api", "services"]
+            },
+            "description": "Get all services"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Service by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "X-Currency",
+                "value": "AED",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/services/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "services", "1"]
+            },
+            "description": "Get specific service by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Service by Slug",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "X-Currency",
+                "value": "AED",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/services/slug/investment-advisory",
+              "host": ["{{base_url}}"],
+              "path": ["api", "services", "slug", "investment-advisory"]
+            },
+            "description": "Get service by URL slug"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Team Members",
+      "item": [
+        {
+          "name": "Get All Team Members",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/team-members",
+              "host": ["{{base_url}}"],
+              "path": ["api", "team-members"]
+            },
+            "description": "Get all team members"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Team Member by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/team-members/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "team-members", "1"]
+            },
+            "description": "Get specific team member by ID"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Testimonials",
+      "item": [
+        {
+          "name": "Get All Testimonials",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/testimonials",
+              "host": ["{{base_url}}"],
+              "path": ["api", "testimonials"]
+            },
+            "description": "Get all testimonials"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Testimonial by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept-Language",
+                "value": "en",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/testimonials/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "testimonials", "1"]
+            },
+            "description": "Get specific testimonial by ID"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Social Media Links",
+      "item": [
+        {
+          "name": "Get All Social Media Links",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/social-media-links",
+              "host": ["{{base_url}}"],
+              "path": ["api", "social-media-links"]
+            },
+            "description": "Get all social media links"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Social Media Link by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/social-media-links/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "social-media-links", "1"]
+            },
+            "description": "Get specific social media link by ID"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Contacts",
+      "item": [
+        {
+          "name": "Get All Contacts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/contacts",
+              "host": ["{{base_url}}"],
+              "path": ["api", "contacts"]
+            },
+            "description": "Get all contact submissions"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Contact by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/contacts/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "contacts", "1"]
+            },
+            "description": "Get specific contact submission by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Contact",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"phone\": \"+971123456789\",\n  \"subject\": \"Project Inquiry\",\n  \"message\": \"I'm interested in learning more about your projects.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/contacts",
+              "host": ["{{base_url}}"],
+              "path": ["api", "contacts"]
+            },
+            "description": "Submit a new contact form"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "item": [
+        {
+          "name": "Get All Settings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/settings",
+              "host": ["{{base_url}}"],
+              "path": ["api", "settings"]
+            },
+            "description": "Get all application settings"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Setting by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/settings/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "settings", "1"]
+            },
+            "description": "Get specific setting by ID"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ]
+}

@@ -47,31 +47,6 @@ interface ProjectServiceInterface extends BaseServiceInterface
     public function findBySlug(string $slug, ?string $locale = null, array $relations = []): ?Project;
 
     /**
-     * Create a new project.
-     *
-     * @param array $data
-     * @return Project
-     */
-    public function create(array $data): Project;
-
-    /**
-     * Update a project.
-     *
-     * @param int|string $id
-     * @param array $data
-     * @return Project
-     */
-    public function update($id, array $data): Project;
-
-    /**
-     * Delete a project.
-     *
-     * @param int|string $id
-     * @return bool
-     */
-    public function delete($id): bool;
-
-    /**
      * Filter projects by criteria.
      *
      * @param array $filters

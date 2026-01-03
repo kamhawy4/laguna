@@ -56,27 +56,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreProjectRequest $request): JsonResponse
-    {
-        try {
-            $project = $this->projectService->create($request->validated());
-
-            return $this->successResponse(
-                new ProjectResource($project),
-                'Project created successfully',
-                201
-            );
-        } catch (\Exception $e) {
-            return $this->errorResponse(
-                'Failed to create project: ' . $e->getMessage(),
-                500
-            );
-        }
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(string $id): JsonResponse
@@ -194,57 +173,7 @@ class ProjectController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateProjectRequest $request, string $id): JsonResponse
-    {
-        try {
-            $project = $this->projectService->findById($id);
 
-            if (!$project) {
-                return $this->notFoundResponse('Project not found');
-            }
-
-            $project = $this->projectService->update($id, $request->validated());
-
-            return $this->successResponse(
-                new ProjectResource($project),
-                'Project updated successfully'
-            );
-        } catch (\Exception $e) {
-            return $this->errorResponse(
-                'Failed to update project: ' . $e->getMessage(),
-                500
-            );
-        }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id): JsonResponse
-    {
-        try {
-            $project = $this->projectService->findById($id);
-
-            if (!$project) {
-                return $this->notFoundResponse('Project not found');
-            }
-
-            $this->projectService->delete($id);
-
-            return $this->successResponse(
-                null,
-                'Project deleted successfully'
-            );
-        } catch (\Exception $e) {
-            return $this->errorResponse(
-                'Failed to delete project: ' . $e->getMessage(),
-                500
-            );
-        }
-    }
 
     /**
      * Publish a project.

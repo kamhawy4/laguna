@@ -47,35 +47,7 @@ class AreaGuideController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreAreaGuideRequest $request): JsonResponse
-    {
-        try {
-            $data = $request->validated();
-            $projectIds = $data['project_ids'] ?? [];
-            unset($data['project_ids']);
 
-            $guide = $this->areaGuideService->create($data);
-
-            if (!empty($projectIds)) {
-                $this->areaGuideService->syncProjects($guide->id, $projectIds);
-                $guide->load('projects');
-            }
-
-            return $this->successResponse(
-                new AreaGuideResource($guide),
-                'Area guide created successfully',
-                201
-            );
-        } catch (\Exception $e) {
-            return $this->errorResponse(
-                'Failed to create area guide: ' . $e->getMessage(),
-                500
-            );
-        }
-    }
 
     /**
      * Display the specified resource.

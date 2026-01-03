@@ -22,6 +22,7 @@ class TeamMemberResource extends Resource
 
     protected static ?string $navigationLabel = 'Team Members';
 
+    protected static ?string $navigationGroup = 'Content Management';
     protected static ?string $modelLabel = 'Team Member';
 
     protected static ?string $pluralModelLabel = 'Team Members';

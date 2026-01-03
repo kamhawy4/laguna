@@ -31,29 +31,5 @@ interface BaseServiceInterface
      */
     public function findOrFail($id, array $relations = []);
 
-    /**
-     * Create a new record.
-     *
-     * @param array $data
-     * @return mixed
-     */
-    public function create(array $data);
-
-    /**
-     * Update a record.
-     *
-     * @param int|string $id
-     * @param array $data
-     * @return mixed
-     */
-    public function update($id, array $data);
-
-    /**
-     * Delete a record.
-     *
-     * @param int|string $id
-     * @return bool
-     */
-    public function delete($id): bool;
 }
 

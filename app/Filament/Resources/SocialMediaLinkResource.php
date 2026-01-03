@@ -16,7 +16,7 @@ class SocialMediaLinkResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-share';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'System';
 
     protected static ?int $navigationSort = 5;
 

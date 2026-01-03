@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Validation\Rule;
 
 class ProjectResource extends Resource
 {
@@ -20,6 +21,8 @@ class ProjectResource extends Resource
     protected static ?string $model = Project::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
+
+    protected static ?string $navigationGroup = 'Projects';
 
     protected static ?string $navigationLabel = 'Projects';
 
@@ -41,17 +44,31 @@ class ProjectResource extends Resource
                         Forms\Components\TextInput::make('slug')
                             ->label('Slug')
                             ->maxLength(255)
-                            ->unique(ignoreRecord: true)
-                            ->helperText('Auto-generated from name if left empty'),
+                            ->disabled()
+                            ->rules([
+                                function ($record) {
+                                    $locale = app()->getLocale();
+
+                                    return Rule::unique('projects', "slug->{$locale}")
+                                        ->ignore($record?->id);
+                                },
+                            ])
+                            ->helperText('Auto-generated from name. Use hyphens (-) for spaces.')
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn(string $operation, $state, Forms\Set $set, Forms\Get $get) =>
+                                $operation === 'create' && $state === '' ? $set('slug', \Illuminate\Support\Str::slug($get('name'))) : null
+                            ),
 
                         Forms\Components\Textarea::make('short_description')
                             ->label('Short Description')
                             ->rows(3)
+                            ->required()
                             ->maxLength(500)
                             ->columnSpanFull(),
 
                         Forms\Components\RichEditor::make('description')
                             ->label('Description')
+                            ->required()
                             ->columnSpanFull(),
 
                         Forms\Components\RichEditor::make('overview')
@@ -60,29 +77,8 @@ class ProjectResource extends Resource
                     ])
                     ->columns(2),
 
-                Forms\Components\Section::make('Location & Developer')
+                Forms\Components\Section::make('Developer')
                     ->schema([
-                        Forms\Components\TextInput::make('location')
-                            ->label('Location')
-                            ->maxLength(255),
-
-                        Forms\Components\TextInput::make('area')
-                            ->label('Area')
-                            ->maxLength(255),
-
-                        Forms\Components\TextInput::make('latitude')
-                            ->label('Latitude')
-                            ->numeric()
-                            ->step(0.00000001)
-                            ->minValue(-90)
-                            ->maxValue(90),
-
-                        Forms\Components\TextInput::make('longitude')
-                            ->label('Longitude')
-                            ->numeric()
-                            ->step(0.00000001)
-                            ->minValue(-180)
-                            ->maxValue(180),
 
                         Forms\Components\TextInput::make('developer_name')
                             ->label('Developer Name')
@@ -94,12 +90,32 @@ class ProjectResource extends Resource
                     ])
                     ->columns(2),
 
+
+                Forms\Components\Section::make('Location & Address')
+                    ->schema([
+                        Forms\Components\TextInput::make('location')
+                            ->label('Address')
+                            ->required()
+                            ->columnSpanFull()
+                            ->maxLength(255),
+
+                        Forms\Components\Textarea::make('map_embed')
+                            ->label('Map Embed Code (Google Maps Iframe)')
+                            ->rows(4)
+                            ->columnSpanFull()
+                            ->helperText('Paste Google Maps embed iframe code here'),
+
+                    ])
+                    ->columns(2),
+
+
                 Forms\Components\Section::make('Pricing & Area (Base Currency: AED)')
                     ->schema([
                         Forms\Components\TextInput::make('price_aed')
                             ->label('Price (AED)')
                             ->numeric()
                             ->prefix('AED')
+                            ->required()
                             ->minValue(0)
                             ->step(0.01)
                             ->placeholder('0.00')
@@ -109,6 +125,7 @@ class ProjectResource extends Resource
                             ->label('Area (sqm)')
                             ->numeric()
                             ->suffix('sqm')
+                            ->required()
                             ->minValue(0)
                             ->step(0.01)
                             ->placeholder('0.00')
@@ -132,6 +149,13 @@ class ProjectResource extends Resource
                         Forms\Components\DatePicker::make('delivery_date')
                             ->label('Delivery Date'),
 
+                        Forms\Components\TextInput::make('roi')
+                            ->label('ROI (%)')
+                            ->numeric()
+                            ->step(0.01)
+                            ->minValue(0)
+                            ->maxValue(100),
+
                         Forms\Components\KeyValue::make('amenities')
                             ->label('Amenities')
                             ->keyLabel('Amenity')
@@ -141,6 +165,7 @@ class ProjectResource extends Resource
                         Forms\Components\KeyValue::make('payment_plan')
                             ->label('Payment Plan')
                             ->keyLabel('Installment')
+                            ->required()
                             ->valueLabel('Details')
                             ->columnSpanFull(),
                     ])
@@ -171,12 +196,20 @@ class ProjectResource extends Resource
                             ->schema([
                                 Forms\Components\FileUpload::make('file')
                                     ->label('Floor Plan')
-                                    ->acceptedFileTypes(['application/pdf', 'image/*'])
+                                    ->disk('public')
                                     ->directory('projects/floor-plans')
-                                    ->maxSize(10240),
+                                    ->acceptedFileTypes([
+                                        'application/pdf',
+                                        'image/jpeg',
+                                        'image/png',
+                                        'image/webp',
+                                    ])
+                                    ->maxSize(10240)
+                                    ->preserveFilenames()
+                                    ->required(),
                             ])
-                            ->columnSpanFull(),
-                    ]),
+                            ->columnSpanFull()
+        ]),
 
                 Forms\Components\Section::make('SEO')
                     ->schema([
@@ -203,15 +236,18 @@ class ProjectResource extends Resource
                             ->default('draft')
                             ->required(),
 
-                        Forms\Components\Toggle::make('is_featured')
-                            ->label('Featured Project')
-                            ->default(false),
 
                         Forms\Components\TextInput::make('sort_order')
                             ->label('Sort Order')
                             ->numeric()
                             ->default(0)
                             ->minValue(0),
+
+
+                        Forms\Components\Toggle::make('is_featured')
+                            ->label('Featured Project')
+                            ->default(false),
+
                     ])
                     ->columns(3),
             ]);

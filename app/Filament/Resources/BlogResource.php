@@ -23,6 +23,8 @@ class BlogResource extends Resource
 
     protected static ?string $navigationLabel = 'Blog Posts';
 
+    protected static ?string $navigationGroup = 'Content Management';
+
     protected static ?string $modelLabel = 'Blog Post';
 
     protected static ?string $pluralModelLabel = 'Blog Posts';
